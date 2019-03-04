@@ -1,0 +1,12 @@
+Origin: iMokhles
+Label: iMokhles repo
+Suite: stable
+Version: 1.0
+Codename: iMokhles
+Architectures: iphoneos-arm
+Components: main
+Description: iMokhles Personal Repo
+MD5Sum:
+a86cad31ba59056fe0888f0ccb6c42ae 454 Packages
+ea85ea80906b96cee8ece011069f7415 62 Packages.gz
+797fac4454e4dbb887c8637f5132e4df 70 Packages.bz2

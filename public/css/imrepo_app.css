@@ -1,0 +1,156 @@
+
+.navbar .title {
+    font-size: 25px;
+}
+.mainPackageBlockStyle {
+    border-radius: 15px;
+    margin-bottom: -15px;
+}
+
+.mainPackageItemStyle {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mainScreenshotsItemStyle {
+    height: 250px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mainWhatsNewMoreSeparator {
+    height: 1px;
+    background-image: linear-gradient(90deg, white, rgb(221, 221, 221), white);
+}
+
+.mainWhatsNewPreviuosButton {
+    font-size: 17px;
+    height: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.authLinkStyle {
+    background-color: #fff;
+            /*rgba(230, 229, 235, 0.5);*/
+    width: 100px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mainLoginListStyle {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+}
+
+.ios .list ul ul {
+    padding-left: 10px;
+}
+
+.navbar a.link {
+    height: 40px;
+}
+.ios {
+
+    /* Main Navigation Bar */
+    --f7-navbar-bg-color: transparent;
+    --f7-navbar-border-color: transparent;
+    --f7-navbar-height: 60px;
+    --f7-navbar-tablet-height: 60px;
+    --f7-navbar-font-size: 17px;
+    --f7-navbar-link-color: #007AFF;
+
+    /* Main Search Bar */
+    --f7-searchbar-input-bg-color: transparent;
+    --f7-searchbar-bg-color: #fff;
+    --f7-searchbar-in-page-content-border-radius: 10px;
+    --f7-searchbar-border-color: transparent;
+    --f7-searchbar-in-page-content-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+
+    /* Main List */
+    --f7-list-border-color: transparent;
+    --f7-list-chevron-icon-color: transparent;
+    --f7-list-chevron-icon-area: 0px;
+    --f7-list-button-border-color: transparent;
+
+    /* Main Block */
+    --f7-block-strong-border-color: transparent;
+
+    /* Inputs */
+    --f7-label-font-size: 15px;
+    --f7-label-font-weight: bold;
+}
+
+/* A bit of demo styles */
+.demo-swiper .swiper-slide {
+    font-size: 25px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #000;
+}
+.demo-swiper .swiper-slide {
+    height: 230px;
+    width: 130px;
+    box-sizing: border-box;
+    /*border: 1px solid #ddd;*/
+    background: #fff;
+}
+.demo-swiper {
+    margin: 0px 0 35px;
+    font-size: 18px;
+    height: 230px;
+}
+.demo-swiper.demo-swiper-auto .swiper-slide {
+    width: 85%;
+}
+.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(2n) {
+    width: 70%;
+}
+.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(3n) {
+    width: 30%;
+}
+
+.loginPageButtonListStyle {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+    background: transparent;
+}
+
+.loginPageButtonListStyle .li {
+    background: transparent;
+}
+.loginPageButtonStyle {
+    background-color: #fff;
+    /*rgba(230, 229, 235, 0.5);*/
+    border-radius: 22px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+    font-weight: bold;
+}
+
+.loginPageFBButtonStyle {
+    color: #f6f7f9;
+    background-color: #3b5998;
+    /*rgba(230, 229, 235, 0.5);*/
+    border-radius: 22px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
+.loginPageTWButtonStyle {
+    color: #f5f8fa;
+    background-color: #1da1f2;
+    /*rgba(230, 229, 235, 0.5);*/
+    border-radius: 22px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
+.loginPageGPButtonStyle {
+    color: #ffffff;
+    background-color: #db4437;
+    /*rgba(230, 229, 235, 0.5);*/
+    border-radius: 22px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+}
