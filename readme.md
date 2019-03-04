@@ -38,9 +38,7 @@ If you discover a security vulnerability within IMRepo, please send an e-mail to
 
 - **[Laravel Framework](http://laravel.com)**
 - **[laravel-backpack](https://backpackforlaravel.com/)**
-- **[HBANG iOS7-CSS](https://github.com/hbang/iOS-7-CSS)**
 - **[Rud0lf77-AutoRepo](https://github.com/rud0lf77/AutoRepo)**
-- **[DropzoneJS](https://github.com/enyo/dropzone)**
 
 
 ## License
