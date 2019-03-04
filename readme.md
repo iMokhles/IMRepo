@@ -28,7 +28,7 @@ manage your cydia repo like a pro :P
 
 ## Contributing
 
-Thank you for considering contributing to IMRepo! The contribution guide can be found in the [Laravel documentation](http://imokhles.com).
+Thank you for considering contributing to IMRepo.
 
 ## Security Vulnerabilities
 
