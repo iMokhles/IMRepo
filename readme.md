@@ -4,7 +4,7 @@ manage your cydia repo like a pro :P
 
 ## How to install
 
-- Will add how to install later ( you can ask in issues if you want to try it )
+- [IMRepo Page](https://imokhles.github.io/IMRepo_Page/)
 
 
 # TODO
