@@ -38,6 +38,7 @@ If you discover a security vulnerability within IMRepo, please send an e-mail to
 
 - **[Laravel Framework](http://laravel.com)**
 - **[laravel-backpack](https://backpackforlaravel.com/)**
+- **[Framework7](https://framework7.io)**
 - **[Rud0lf77-AutoRepo](https://github.com/rud0lf77/AutoRepo)**
 
 
