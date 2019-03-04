@@ -46,6 +46,8 @@ class CreateChangelogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('changelogs');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::dropIfExists('change_logs');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
