@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Helpers\IMPackageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
@@ -16,16 +17,32 @@ class RepoController extends Controller
 {
 
     public function getRelease(Request $request) {
+
+
+        // Check if Packages files exists
+        $packagesFile = storage_path('Packages');
+        if (!file_exists($packagesFile)) {
+            $packagesFile = IMPackageHelper::generatePackagesFile();
+        }
+        $bz2File = storage_path('Packages.bz2');
+        if (!file_exists($bz2File)) {
+            $bz2File = IMPackageHelper::generateBZipPackages();
+        }
+        $gzFile = storage_path('Packages.gz');
+        if (!file_exists($bz2File)) {
+            $gzFile = IMPackageHelper::generateGzPackages();
+        }
+
         $origin = Config::get('settings.release_origin');
         $label = Config::get('settings.release_label');
         $version = Config::get('settings.release_version');
         $description = Config::get('settings.release_description');
-        $md5_packages = md5_file(storage_path('Packages'));
-        $md5_packagesBz = md5_file(storage_path('Packages.bz2'));
-        $md5_packagesGz = md5_file(storage_path('Packages.gz'));
-        $size_packages = filesize(storage_path('Packages'));
-        $size_packagesBz = filesize(storage_path('Packages.bz2'));
-        $size_packagesGz = filesize(storage_path('Packages.gz'));
+        $md5_packages = md5_file($packagesFile);
+        $md5_packagesBz = md5_file($bz2File);
+        $md5_packagesGz = md5_file($gzFile);
+        $size_packages = filesize($packagesFile);
+        $size_packagesBz = filesize($bz2File);
+        $size_packagesGz = filesize($gzFile);
         $release_file_content = "Origin: $origin
 Label: $label
 Suite: stable
@@ -38,13 +55,13 @@ MD5Sum:
 $md5_packages $size_packages Packages
 $md5_packagesGz $size_packagesGz Packages.gz
 $md5_packagesBz $size_packagesBz Packages.bz2";
+
         $releaseFile = storage_path("Release");
         if (file_exists($releaseFile)) {
             unlink($releaseFile);
             $handle = fopen($releaseFile, "w");
             $size = fwrite($handle, $release_file_content) ;//str_replace(" ", "", $release_file_content));
             fclose($handle);
-//        dd($releaseFile);
             return response()->download($releaseFile, 'Release', [
                 'Content-Type' => 'application/octet-stream'
             ]);
@@ -52,7 +69,6 @@ $md5_packagesBz $size_packagesBz Packages.bz2";
             $handle = fopen($releaseFile, "w");
             $size = fwrite($handle, $release_file_content) ;//str_replace(" ", "", $release_file_content));
             fclose($handle);
-//        dd($releaseFile);
             return response()->download($releaseFile, 'Release', [
                 'Content-Type' => 'application/octet-stream'
             ]);

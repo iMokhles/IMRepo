@@ -33,7 +33,7 @@ class SocialiteHelper
      */
     static public function getSocialiteInstance($social, $type) {
 
-        $redirectUrl = route("user.social.$type.handler", ['social' => $social]);
+        $redirectUrl = route("customer.social.$type.handler", ['social' => $social]);
         $serviceConfig = config('services.' . $social);
         $serviceConfig['redirect'] = $redirectUrl;
 

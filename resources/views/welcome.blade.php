@@ -11,9 +11,9 @@
                 <div class="title"></div>
                 <div class="right">
                     @if(!auth('customer')->check())
-                        <a href="#" class="link justify-content-center authLinkStyle">@lang('backpack::base.login')</a>
+                        <a href="{{route('customer.login')}}" class="link external justify-content-center authLinkStyle">@lang('backpack::base.login')</a>
                      @else
-                        <a href="#" class="link justify-content-center authLinkStyle">@lang('backpack::base.dashboard')</a>
+                        <a href="{{route('customer.dashboard')}}" class="link external justify-content-center authLinkStyle">@lang('backpack::base.dashboard')</a>
                     @endif
 
                 </div>

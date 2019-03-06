@@ -392,4 +392,140 @@ class IMPackageHelper
         }
         return null;
     }
+
+    public static function generatePackagesFile() {
+        $queryPackages = Package::select(config('repo_config.packages_select'));
+        $queryPackages = $queryPackages->where([
+            "is_active" => true
+        ]);
+        $packagesResults = $queryPackages->get();
+
+        $packagesText = "";
+        $packages = array();
+        foreach ($packagesResults as $package) {
+            if ($package == null)
+                continue;
+            if (!isset($packages[$package->Package]))
+                $packages[$package->Package] = $package;
+            else
+                // Compare version numbers
+                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
+                    $packages[$package->Package] = $package;
+        }
+
+        foreach ($packages as $package2) {
+            $packageText = "";
+            foreach($package2->getAttributes() as $key => $value) {
+
+                if (!empty($key) && !empty($value)) {
+                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
+                }
+            }
+            $packagesText .= $packageText . "\n";
+        }
+        $packagesFile = storage_path("Packages");
+        if (file_exists($packagesFile)) {
+            unlink($packagesFile);
+            $handle = fopen($packagesFile, "w");
+            $size = fwrite($handle, $packagesText);
+            fclose($handle);
+            return $packagesFile;
+        } else {
+            $handle = fopen($packagesFile, "w");
+            $size = fwrite($handle, $packagesText);
+            fclose($handle);
+            return $packagesFile;
+        }
+    }
+    public static function generateBZipPackages() {
+        $queryPackages = Package::select(config('repo_config.packages_select'));
+        $queryPackages = $queryPackages->where([
+            "is_active" => true
+        ]);
+        $packagesResults = $queryPackages->get();
+        $packagesText = "";
+        $packages = array();
+        foreach ($packagesResults as $package) {
+            if ($package == null)
+                continue;
+            if (!isset($packages[$package->Package]))
+                $packages[$package->Package] = $package;
+            else
+                // Compare version numbers
+                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
+                    $packages[$package->Package] = $package;
+        }
+        foreach ($packages as $package2) {
+            $packageText = "";
+            foreach($package2->getAttributes() as $key => $value) {
+                if (!empty($key) && !empty($value)) {
+                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
+                }
+            }
+            $packagesText .= $packageText . "\n";
+        }
+        $packagesFile = storage_path("Packages");
+        $handle = fopen($packagesFile, "w");
+        $size = fwrite($handle, $packagesText);
+        fclose($handle);
+        $bz2File = storage_path("Packages.bz2");
+        if (file_exists($bz2File)) {
+            unlink($bz2File);
+            $b_handle = bzopen($bz2File, "w");
+            $size = bzwrite($b_handle, file_get_contents($packagesFile));
+            bzclose($b_handle);
+            return $bz2File;
+        } else {
+            $b_handle = bzopen($bz2File, "w");
+            $size = bzwrite($b_handle, file_get_contents($packagesFile));
+            bzclose($b_handle);
+            return $bz2File;
+        }
+    }
+
+    public static function generateGzPackages() {
+        $queryPackages = Package::select(config('repo_config.packages_select'));
+        $queryPackages = $queryPackages->where([
+            "is_active" => true
+        ]);
+        $packagesResults = $queryPackages->get();
+        $packagesText = "";
+        $packages = array();
+        foreach ($packagesResults as $package) {
+            if ($package == null)
+                continue;
+            if (!isset($packages[$package->Package]))
+                $packages[$package->Package] = $package;
+            else
+                // Compare version numbers
+                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
+                    $packages[$package->Package] = $package;
+        }
+        foreach ($packages as $package2) {
+            $packageText = "";
+            foreach($package2->getAttributes() as $key => $value) {
+                if (!empty($key) && !empty($value)) {
+                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
+                }
+            }
+            $packagesText .= $packageText . "\n";
+        }
+        $packagesFile = storage_path("Packages");
+        $handle = fopen($packagesFile, "w");
+        $size = fwrite($handle, $packagesText);
+        fclose($handle);
+        $gzFile = storage_path("Packages.gz");
+        if (file_exists($gzFile)) {
+            unlink($gzFile);
+            $b_handle = gzopen($gzFile, "w");
+            $size = gzwrite($b_handle, file_get_contents($packagesFile));
+            gzclose($b_handle);
+            return $gzFile;
+        } else {
+            $b_handle = gzopen($gzFile, "w");
+            $size = gzwrite($b_handle, file_get_contents($packagesFile));
+            gzclose($b_handle);
+            return $gzFile;
+        }
+    }
 }

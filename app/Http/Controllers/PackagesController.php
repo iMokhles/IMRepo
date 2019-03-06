@@ -30,152 +30,23 @@ class PackagesController extends Controller
     }
 
     public function getPackages(Request $request) {
-        $queryPackages = Package::select(config('repo_config.packages_select'));
-        $queryPackages = $queryPackages->where([
-            "is_active" => true
+        $packagesFile = IMPackageHelper::generatePackagesFile();
+        return response()->download($packagesFile, 'Packages',[
+            'Content-Type' => 'application/octet-stream'
         ]);
-        $packagesResults = $queryPackages->get();
-
-        $packagesText = "";
-        $packages = array();
-        foreach ($packagesResults as $package) {
-            if ($package == null)
-                continue;
-            if (!isset($packages[$package->Package]))
-                $packages[$package->Package] = $package;
-            else
-                // Compare version numbers
-                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
-                    $packages[$package->Package] = $package;
-        }
-
-        foreach ($packages as $package2) {
-            $packageText = "";
-            foreach($package2->getAttributes() as $key => $value) {
-
-                if (!empty($key) && !empty($value)) {
-                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
-                }
-            }
-            $packagesText .= $packageText . "\n";
-        }
-        $packagesFile = storage_path("Packages");
-        if (file_exists($packagesFile)) {
-//            return;
-            unlink($packagesFile);
-            $handle = fopen($packagesFile, "w");
-            $size = fwrite($handle, $packagesText);
-            fclose($handle);
-            return response()->download($packagesFile, 'Packages',[
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        } else {
-//            return;
-            $handle = fopen($packagesFile, "w");
-            $size = fwrite($handle, $packagesText);
-            fclose($handle);
-            return response()->download($packagesFile, 'Packages',[
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        }
     }
     public function generateBZipPackages(Request $request) {
-        $queryPackages = Package::select(config('repo_config.packages_select'));
-        $queryPackages = $queryPackages->where([
-            "is_active" => true
+        $bz2File = IMPackageHelper::generateBZipPackages();
+        return response()->download($bz2File, 'Packages.bz2', [
+            'Content-Type' => 'application/octet-stream'
         ]);
-        $packagesResults = $queryPackages->get();
-        $packagesText = "";
-        $packages = array();
-        foreach ($packagesResults as $package) {
-            if ($package == null)
-                continue;
-            if (!isset($packages[$package->Package]))
-                $packages[$package->Package] = $package;
-            else
-                // Compare version numbers
-                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
-                    $packages[$package->Package] = $package;
-        }
-        foreach ($packages as $package2) {
-            $packageText = "";
-            foreach($package2->getAttributes() as $key => $value) {
-                if (!empty($key) && !empty($value)) {
-                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
-                }
-            }
-            $packagesText .= $packageText . "\n";
-        }
-        $packagesFile = storage_path("Packages");
-        $handle = fopen($packagesFile, "w");
-        $size = fwrite($handle, $packagesText);
-        fclose($handle);
-        $bz2File = storage_path("Packages.bz2");
-        if (file_exists($bz2File)) {
-            unlink($bz2File);
-            $b_handle = bzopen($bz2File, "w");
-            $size = bzwrite($b_handle, file_get_contents($packagesFile));
-            bzclose($b_handle);
-            return response()->download($bz2File, 'Packages.bz2', [
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        } else {
-            $b_handle = bzopen($bz2File, "w");
-            $size = bzwrite($b_handle, file_get_contents($packagesFile));
-            bzclose($b_handle);
-            return response()->download($bz2File, 'Packages.bz2', [
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        }
     }
     public function generateGzPackages(Request $request) {
-        $queryPackages = Package::select(config('repo_config.packages_select'));
-        $queryPackages = $queryPackages->where([
-            "is_active" => true
+        $gzFile = IMPackageHelper::generateGzPackages();
+        return response()->download($gzFile, 'Packages.gz', [
+            'Content-Type' => 'application/octet-stream'
         ]);
-        $packagesResults = $queryPackages->get();
-        $packagesText = "";
-        $packages = array();
-        foreach ($packagesResults as $package) {
-            if ($package == null)
-                continue;
-            if (!isset($packages[$package->Package]))
-                $packages[$package->Package] = $package;
-            else
-                // Compare version numbers
-                if (IMPackageHelper::CompareVersions($package->Version, $packages[$package->Package]->Version) > 0)
-                    $packages[$package->Package] = $package;
-        }
-        foreach ($packages as $package2) {
-            $packageText = "";
-            foreach($package2->getAttributes() as $key => $value) {
-                if (!empty($key) && !empty($value)) {
-                    $packageText .= $key . ": " . trim(str_replace("\n", "\n ", $value)) . "\n";
-                }
-            }
-            $packagesText .= $packageText . "\n";
-        }
-        $packagesFile = storage_path("Packages");
-        $handle = fopen($packagesFile, "w");
-        $size = fwrite($handle, $packagesText);
-        fclose($handle);
-        $gzFile = storage_path("Packages.gz");
-        if (file_exists($gzFile)) {
-            unlink($gzFile);
-            $b_handle = gzopen($gzFile, "w");
-            $size = gzwrite($b_handle, file_get_contents($packagesFile));
-            gzclose($b_handle);
-            return response()->download($gzFile, 'Packages.gz', [
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        } else {
-            $b_handle = gzopen($gzFile, "w");
-            $size = gzwrite($b_handle, file_get_contents($packagesFile));
-            gzclose($b_handle);
-            return response()->download($gzFile, 'Packages.gz', [
-                'Content-Type' => 'application/octet-stream'
-            ]);
-        }
+
     }
     public function getPackageFile(Request $request, $packageHash) {
 //        $currentUser = backpack_user()->hasRole('customer');
