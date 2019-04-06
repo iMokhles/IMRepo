@@ -18,13 +18,13 @@ DB_DATABASE=DB_NAME
 DB_USERNAME=USERNAME
 DB_PASSWORD=PASSWORD
 ```
-* generate laravel key
-```bash
-php artisan key:generate
-```
 * install composer packages
 ```bash
 composer update
+```
+* generate laravel key
+```bash
+php artisan key:generate
 ```
 * setup Backpack Base package
 ```bash
