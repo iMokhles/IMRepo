@@ -47,7 +47,7 @@ class Authenticate extends Middleware
         }
 
         throw new AuthenticationException(
-            'Unauthenticated.', $guards, $this->redirectTo($request, $guards)
+            'Unauthenticated.', $guards, $this->redirectTo2($request, $guards)
         );
     }
 
@@ -58,7 +58,7 @@ class Authenticate extends Middleware
      * @param  $guards
      * @return string
      */
-    protected function redirectTo($request, $guards)
+    protected function redirectTo2($request, $guards)
     {
         if (! $request->expectsJson()) {
 

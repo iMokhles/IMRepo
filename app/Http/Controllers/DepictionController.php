@@ -21,14 +21,16 @@ class DepictionController extends Controller
     public function getDepiction($package_hash) {
 
         return view('depiction.index', [
-            'package' => Package::wherePackageHash($package_hash)->first()
+            'package' => Package::wherePackageHash($package_hash)->orderBy('Version', 'desc')->get()[0],
+            'first_package' => Package::wherePackageHash($package_hash)->first()
+
         ]);
     }
 
     public function getChanges($package_hash) {
         return view('depiction.changelogs', [
-            'changes' => ChangeLog::wherePackageHash($package_hash)->get(),
-            'package' => Package::wherePackageHash($package_hash)->first()
+            'changes' => ChangeLog::wherePackageHash($package_hash)->orderBy('package_version', 'desc')->get(),
+            'package' => Package::wherePackageHash($package_hash)->orderBy('Version', 'desc')->get()[0]
         ]);
     }
     public function getScreenshot($id, $name) {

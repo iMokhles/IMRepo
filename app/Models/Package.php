@@ -80,7 +80,7 @@ class Package extends Model implements HasMedia
     {
         parent::boot();
         static::deleting(function($obj) {
-            \Storage::disk('debs_disk')->delete($obj->Filename);
+            \Storage::disk('storage')->delete($obj->Filename);
         });
     }
 

@@ -1,0 +1,16 @@
+Package: com.imokhles.dzsnap2
+Version: 0.0.1-12
+Section: Tweaks
+Depends: firmware (>= 10.0), mobilesubstrate
+Conflicts: com.cokepokes.snapdecent, com.cokepokes.libphantom, com.cokepokes.spectre, com.unlimapps.uasharedtools, tv.othman.scothman, tv.othman.scothman.ios11, com.pantsthief.snapchatnoclickbait, com.timecompiler.snapchatlog, com.nathaningraham.snapchatlowpowermodeenabler, com.expetelek.keepsnapchatsignedin, com.chloeeisoaky.luminous, com.neinzedd9.scfiltermover, net.ibrahim.scstorytimer, com.ithegentle.snapcheck, com.bengerard.snapselect, com.yungraj.streaknotify, com.n00neimp0rtant.picarchiver, brexit.chloee.snapcolor, fr.s0me1ne.snapbreak
+Architecture: iphoneos-arm
+Filename: debs/eecea82f4d83bcc42ff653d94497fe1f.deb
+Size: 11916
+Description: An awesome MobileSubstrate tweak!
+Name: DzSnap2
+Author: iMokhles
+Maintainer: iMokhles
+Depiction: https://imrepolocal.com/depiction/INUQRA7I6KxPKaXSXkZA32tjiLN4np
+MD5sum: 61f610fea66362e295bfcd4ffcccc16d
+package_hash: INUQRA7I6KxPKaXSXkZA32tjiLN4np
+

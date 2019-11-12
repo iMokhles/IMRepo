@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Helpers\IMPackageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use Prologue\Alerts\Facades\Alert;
 
 class RepoController extends Controller
 {
@@ -87,5 +88,17 @@ $md5_packagesBz $size_packagesBz Packages.bz2";
         return response()->download($releaseFile, 'CydiaIcon.png', [
             'Content-Type' => 'application/octet-stream'
         ]);
+    }
+    public function buildPackages(Request $request) {
+        $packagesFile = IMPackageHelper::generatePackagesFile();
+        $bz2File = IMPackageHelper::generateBZipPackages();
+        $gzFile = IMPackageHelper::generateGzPackages();
+
+        if (filesize($packagesFile) > 0 && filesize($bz2File) > 0 && filesize($gzFile) > 0) {
+            \Alert::success('SUCCESS: built packages successfully')->flash();
+            return redirect(backpack_url('dashboard'));
+        }
+        \Alert::error('FAILED: faced error while building packages')->flash();
+        return redirect(backpack_url('dashboard'));
     }
 }

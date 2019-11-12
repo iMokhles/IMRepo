@@ -58,6 +58,14 @@ class ChangeLogCrudController extends CrudController
             'attribute' => "Version", // foreign key attribute that is shown to user
             'model' => "App\Models\Package", // foreign key model
         ])->beforeColumn('user_id');
+        $this->crud->addColumn([
+            'name' => 'changes', // The db column name
+            'label' => "Changes", // Table column heading
+            'type' => 'table',
+            'columns' => [
+                'change' => 'Change',
+            ]
+        ])->beforeColumn('user_id');
 
 
         $this->crud->addFields([
@@ -68,6 +76,12 @@ class ChangeLogCrudController extends CrudController
                 'entity' => 'package', // the method that defines the relationship in your Model
                 'attribute' => 'Name', // foreign key attribute that is shown to user
                 'model' => "App\Models\Package", // foreign key model
+            ],
+            [
+                'label' => 'User',
+                'name' => 'user_id',
+                'default' => backpack_user()->id,
+                'type' => 'hidden',
             ],
             [
                 'label' => "Version",
@@ -90,6 +104,7 @@ class ChangeLogCrudController extends CrudController
             ],
         ]);
 
+        $this->crud->orderBy('package_version', 'desc');
         // add asterisk for fields that are required in ChangeLogRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');

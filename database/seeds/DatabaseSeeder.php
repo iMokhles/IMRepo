@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         factory(\App\User::class, 1)->create();
         factory(\App\Models\Customer::class, 1)->create();
         $this->call(SettingsTableSeeder::class);
+//        $this->call(ChangeLogsTableSeeder::class);
     }
 }

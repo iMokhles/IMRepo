@@ -9,7 +9,8 @@
 @php
     $depiction = \App\Models\Depiction::wherePackageId($package->id)->first();
     $screenshots = $depiction->getMedia('media');
-    $changeLog = \App\Models\ChangeLog::wherePackageVersion($package->id)->first();
+    $changeLog = \App\Models\ChangeLog::wherePackageHash($package->package_hash)->orderBy('package_version', 'desc')->get();
+
 @endphp
 @section('content')
 
@@ -18,8 +19,10 @@
         <!-- Scrollable page content -->
         <div class="page-content">
             <!-- Additional "block-strong" class for extra highlighting -->
+            <div class="display-flex justify-content-center align-items-center">
+                <img class="margin-top" src="{{asset('images/Sections').'/'.$package->Section}}.png" width="100"/>
+            </div>
             <div class="block-title-large margin-top text-align-center">{{$package->Name}}</div>
-
             <div class="list media-list margin-left margin-right">
 
                 <div class="block-title-medium margin-top margin-bottom text-align-left">@lang('imrepo.description')</div>
@@ -39,7 +42,8 @@
                         <div class="item-content">
                             <div class="item-inner">
                                 <ul class="mainWhatsNewList">
-                                    @foreach($changeLog->changes as $key => $value)
+                                    @php($smallChanges = json_decode($changeLog[0]->changes, true))
+                                    @foreach($smallChanges as $key => $value)
                                         <li> {{$key+1}} - {{$value['change']}}</li>
                                     @endforeach
                                 </ul>
@@ -89,7 +93,7 @@
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">@lang('imrepo.uploaded')</div>
-                                        <div class="item-after">{{$package->created_at->format('d M Y')}}</div>
+                                        <div class="item-after">{{$first_package->created_at->format('d M Y H:i:s')}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +103,7 @@
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">@lang('imrepo.updated')</div>
-                                        <div class="item-after">{{$package->updated_at->format('d M Y')}}</div>
+                                        <div class="item-after">{{$package->updated_at->format('d M Y H:i:s')}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -149,8 +153,8 @@
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">@lang('imrepo.depends')</div>
-                                        <div class="item-after">{{$package->Depends}}</div>
                                     </div>
+                                    <div class="item-text">{{$package->Depends}}</div>
                                 </div>
                             </div>
                         </li>
@@ -159,8 +163,8 @@
                                 <div class="item-inner">
                                     <div class="item-title-row">
                                         <div class="item-title">@lang('imrepo.conflicts')</div>
-                                        <div class="item-after">{{$package->Conflicts}}</div>
                                     </div>
+                                    <div class="item-text">{{$package->Conflicts}}</div>
                                 </div>
                             </div>
                         </li>

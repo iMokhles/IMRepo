@@ -20,6 +20,7 @@ Route::group([
     CRUD::resource('settings', 'SettingCrudController');
 
     Route::get('/delete/screenshot/{id}', 'DepictionCrudController@deleteScreenshot')->name('delete.screenshot');
+    Route::get('/build_packages', 'RepoController@buildPackages');
 
 
 }); // this should be the absolute last line of this file

@@ -88,6 +88,7 @@ class PackageCrudController extends CrudController
             ],
         ], 'update');
 
+        $this->crud->orderBy('Version', 'desc');
         // add asterisk for fields that are required in PackageRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
@@ -136,63 +137,68 @@ class PackageCrudController extends CrudController
         } else {
             $updated = Package::find($package->id)->update($control_info);
             if ($updated) {
-                $this->createDepiction($control_info);
+                $this->saveChangeLog($deb_version, $deb_identifier);
             }
             return $updated;
         }
     }
 
-//    public function saveChangeLog($package_info) {
-//        $isExist = Package::where([
-//            'Package' => $package_info['Package'],
-//        ])->first();
-//        $isChangeLogExist = ChangeLog::where([
-//            'package_identifier' => $package_info['Package'],
-//        ])->first();
-//        $text = "";
-//        if (!is_null($isExist) && !is_null($isChangeLogExist)) {
-//            $text = "* new release";
-//        } else {
-//            $text = "* new release";
-//        }
-//        $inserted = ChangeLog::create([
-//            'package_id' => $isExist->id,
-//            'package_hash' => $isExist->package_hash,
-//            'package_version' => $package_info['Version'],
-//            'user_id' => backpack_user()->id,
-//            'changes' => $text,
-//            'package_identifier' => $package_info['Package']
-//        ]);
-//        if ($inserted) {
-//            $this->createDepiction($package_info);
-//        }
-//        return $inserted;
-//    }
-
-    public function createDepiction($package_info) {
-        $isExist = Package::where([
-            'Package' => $package_info['Package'],
+    public function saveChangeLog($deb_version, $deb_identifier) {
+        $package = Package::where([
+            'Package' => $deb_identifier,
+            'Version' => $deb_version
         ])->first();
-        $isDepictionExist = Depiction::where([
-            'package_id' => $isExist->id,
-        ])->first();
-        if (!is_null($isExist) && is_null($isDepictionExist)) {
-
-            $inserted = Depiction::create([
-
-                'package_id' => $isExist->id,
-                'long_description' => $isExist->Description,
-                'price' => 'Free',
-            ]);
-            if ($inserted) {
-                $updated = Package::find($isExist->id)->update([
-                    'Depiction' => route('package.depiction', ['package_hash' => $isExist->package_hash])
-                ]);
-                if ($updated) {
-                    return $inserted;
-                }
+        if ($package) {
+            $changeLog = ChangeLog::where([
+                'package_identifier' => $package->Package,
+            ])->first();
+            $isHasChangeLog = false;
+            if ($changeLog) {
+                $isHasChangeLog = true;
+            } else {
+                $isHasChangeLog = false;
             }
 
+            $insertChangeLog = ChangeLog::create([
+                'package_id' => $package->id,
+                'package_hash' => $package->package_hash,
+                'package_version' => $package->id,
+                'user_id' => backpack_user()->id,
+                'changes' => ($isHasChangeLog === true) ? '[{"change":"* new update"}]' : '[{"change":"* first release"}]',
+                'package_identifier' => $package->Package,
+            ]);
+
+            if ($insertChangeLog) {
+                $this->createDepiction($deb_version, $deb_identifier);
+            }
+        }
+    }
+
+    public function createDepiction($deb_version, $deb_identifier) {
+        $package = Package::where([
+            'Package' => $deb_identifier,
+            'Version' => $deb_version
+        ])->first();
+        if ($package) {
+            $depiction = Depiction::where([
+                'package_id' => $package->id,
+            ])->first();
+            if (!$depiction) {
+                $insertDepiction = Depiction::create([
+
+                    'package_id' => $package->id,
+                    'long_description' => $package->Description,
+                    'price' => 'Free',
+                ]);
+                if ($insertDepiction) {
+                    $updatedPackage = $package->update([
+                        'Depiction' => route('package.depiction', ['package_hash' => $package->package_hash])
+                    ]);
+                    if ($updatedPackage) {
+                        return $insertDepiction;
+                    }
+                }
+            }
         }
         return false;
     }

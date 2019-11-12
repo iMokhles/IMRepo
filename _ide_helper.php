@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.27 on 2019-02-25 10:25:28.
+ * Generated for Laravel 5.7.27 on 2019-11-11 16:58:57.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13545,6 +13545,108 @@ namespace Jenssegers\Date {
  
 }
 
+namespace Laravel\Socialite\Facades { 
+
+    /**
+     * 
+     *
+     * @see \Laravel\Socialite\SocialiteManager
+     */ 
+    class Socialite {
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @static 
+         */ 
+        public static function with($driver)
+        {
+            return \Laravel\Socialite\SocialiteManager::with($driver);
+        }
+        
+        /**
+         * Build an OAuth 2 provider instance.
+         *
+         * @param string $provider
+         * @param array $config
+         * @return \Laravel\Socialite\Two\AbstractProvider 
+         * @static 
+         */ 
+        public static function buildProvider($provider, $config)
+        {
+            return \Laravel\Socialite\SocialiteManager::buildProvider($provider, $config);
+        }
+        
+        /**
+         * Format the server configuration.
+         *
+         * @param array $config
+         * @return array 
+         * @static 
+         */ 
+        public static function formatConfig($config)
+        {
+            return \Laravel\Socialite\SocialiteManager::formatConfig($config);
+        }
+        
+        /**
+         * Get the default driver name.
+         *
+         * @throws \InvalidArgumentException
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultDriver()
+        {
+            return \Laravel\Socialite\SocialiteManager::getDefaultDriver();
+        }
+        
+        /**
+         * Get a driver instance.
+         *
+         * @param string $driver
+         * @return mixed 
+         * @throws \InvalidArgumentException
+         * @static 
+         */ 
+        public static function driver($driver = null)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::driver($driver);
+        }
+        
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return $this 
+         * @static 
+         */ 
+        public static function extend($driver, $callback)
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::extend($driver, $callback);
+        }
+        
+        /**
+         * Get all of the created "drivers".
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDrivers()
+        {
+            //Method inherited from \Illuminate\Support\Manager            
+            return \Laravel\Socialite\SocialiteManager::getDrivers();
+        }
+         
+    }
+ 
+}
+
 namespace Prologue\Alerts\Facades { 
 
     /**
@@ -13882,6 +13984,18 @@ namespace Prologue\Alerts\Facades {
  
 }
 
+namespace Backpack\Settings\app\Models { 
+
+    /**
+     * 
+     *
+     */ 
+    class Setting {
+         
+    }
+ 
+}
+
 namespace Arcanedev\LogViewer\Facades { 
 
     /**
@@ -14150,6 +14264,173 @@ namespace Arcanedev\LogViewer\Facades {
         public static function version()
         {
             return \Arcanedev\LogViewer\LogViewer::version();
+        }
+         
+    }
+ 
+}
+
+namespace Orangehill\Iseed\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Iseed {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function readStubFile($file)
+        {
+            return \Orangehill\Iseed\Iseed::readStubFile($file);
+        }
+        
+        /**
+         * Generates a seed file.
+         *
+         * @param string $table
+         * @param string $prefix
+         * @param string $suffix
+         * @param string $database
+         * @param int $max
+         * @param string $prerunEvent
+         * @param string $postunEvent
+         * @return bool 
+         * @throws Orangehill\Iseed\TableNotFoundException
+         * @static 
+         */ 
+        public static function generateSeed($table, $prefix = null, $suffix = null, $database = null, $max = 0, $chunkSize = 0, $exclude = null, $prerunEvent = null, $postrunEvent = null, $dumpAuto = true, $indexed = true, $orderBy = null, $direction = 'ASC')
+        {
+            return \Orangehill\Iseed\Iseed::generateSeed($table, $prefix, $suffix, $database, $max, $chunkSize, $exclude, $prerunEvent, $postrunEvent, $dumpAuto, $indexed, $orderBy, $direction);
+        }
+        
+        /**
+         * Get a seed folder path
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getSeedPath()
+        {
+            return \Orangehill\Iseed\Iseed::getSeedPath();
+        }
+        
+        /**
+         * Get the Data
+         *
+         * @param string $table
+         * @return Array 
+         * @static 
+         */ 
+        public static function getData($table, $max, $exclude = null, $orderBy = null, $direction = 'ASC')
+        {
+            return \Orangehill\Iseed\Iseed::getData($table, $max, $exclude, $orderBy, $direction);
+        }
+        
+        /**
+         * Repacks data read from the database
+         *
+         * @param array|object $data
+         * @return array 
+         * @static 
+         */ 
+        public static function repackSeedData($data)
+        {
+            return \Orangehill\Iseed\Iseed::repackSeedData($data);
+        }
+        
+        /**
+         * Checks if a database table exists
+         *
+         * @param string $table
+         * @return boolean 
+         * @static 
+         */ 
+        public static function hasTable($table)
+        {
+            return \Orangehill\Iseed\Iseed::hasTable($table);
+        }
+        
+        /**
+         * Generates a seed class name (also used as a filename)
+         *
+         * @param string $table
+         * @param string $prefix
+         * @param string $suffix
+         * @return string 
+         * @static 
+         */ 
+        public static function generateClassName($table, $prefix = null, $suffix = null)
+        {
+            return \Orangehill\Iseed\Iseed::generateClassName($table, $prefix, $suffix);
+        }
+        
+        /**
+         * Get the path to the stub file.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getStubPath()
+        {
+            return \Orangehill\Iseed\Iseed::getStubPath();
+        }
+        
+        /**
+         * Populate the place-holders in the seed stub.
+         *
+         * @param string $class
+         * @param string $stub
+         * @param string $table
+         * @param string $data
+         * @param int $chunkSize
+         * @param string $prerunEvent
+         * @param string $postunEvent
+         * @return string 
+         * @static 
+         */ 
+        public static function populateStub($class, $stub, $table, $data, $chunkSize = null, $prerunEvent = null, $postrunEvent = null, $indexed = true)
+        {
+            return \Orangehill\Iseed\Iseed::populateStub($class, $stub, $table, $data, $chunkSize, $prerunEvent, $postrunEvent, $indexed);
+        }
+        
+        /**
+         * Create the full path name to the seed file.
+         *
+         * @param string $name
+         * @param string $path
+         * @return string 
+         * @static 
+         */ 
+        public static function getPath($name, $path)
+        {
+            return \Orangehill\Iseed\Iseed::getPath($name, $path);
+        }
+        
+        /**
+         * Cleans the iSeed section
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function cleanSection()
+        {
+            return \Orangehill\Iseed\Iseed::cleanSection();
+        }
+        
+        /**
+         * Updates the DatabaseSeeder file's run method (kudoz to: https://github.com/JeffreyWay/Laravel-4-Generators)
+         *
+         * @param string $className
+         * @return bool 
+         * @static 
+         */ 
+        public static function updateDatabaseSeederRunMethod($className)
+        {
+            return \Orangehill\Iseed\Iseed::updateDatabaseSeederRunMethod($className);
         }
          
     }
@@ -16594,9 +16875,15 @@ namespace  {
 
     class Date extends \Jenssegers\Date\Date {}
 
+    class Socialite extends \Laravel\Socialite\Facades\Socialite {}
+
     class Alert extends \Prologue\Alerts\Facades\Alert {}
 
+    class Setting extends \Backpack\Settings\app\Models\Setting {}
+
     class LogViewer extends \Arcanedev\LogViewer\Facades\LogViewer {}
+
+    class Iseed extends \Orangehill\Iseed\Facades\Iseed {}
  
 }
 

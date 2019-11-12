@@ -14,6 +14,7 @@ return [
         "Priority",
         "Section",
         "Depends",
+        "Conflicts",
         "Architecture",
         "Filename",
         "Size",

@@ -44,7 +44,7 @@ class CreateDownloadsTable extends Migration
             $table->enum('type', ['download', 'install'])->nullable();
 
             // download ips
-            $table->json('ip_addresses')->nullable();
+            $table->text('ip_addresses')->nullable();
 
             // downloads counter
             $table->unsignedInteger('count')->default(0);

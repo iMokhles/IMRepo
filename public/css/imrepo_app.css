@@ -75,6 +75,9 @@
     --f7-list-chevron-icon-area: 0px;
     --f7-list-button-border-color: transparent;
 
+    /* Main List Item */
+    --f7-list-item-text-max-lines: 15;
+
     /* Main Block */
     --f7-block-strong-border-color: transparent;
 

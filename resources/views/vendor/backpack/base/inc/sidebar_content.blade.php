@@ -22,3 +22,5 @@
 
 
 <li><a href='{{ url(config('backpack.base.route_prefix', 'admin') . '/settings') }}'><i class='fa fa-cog'></i> <span>Settings</span></a></li>
+
+<li><a style="background-color: #165900; color: #ffffff;" href='{{ backpack_url('build_packages') }}'><i class='fa fa-refresh'></i> <span>Build Packages</span></a></li>

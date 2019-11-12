@@ -27,7 +27,7 @@ class CreateChangelogsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             // change log text
-            $table->json('changes')->nullable();
+            $table->text('changes')->nullable();
             // package version
             $table->string('package_version')->nullable();
             // package hash
