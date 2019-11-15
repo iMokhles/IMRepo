@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37c7b3e5-8ab1-4aa6-ae1f-ceff228e1e5d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/unzip_vendor.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/update_public.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zip_vendor.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -170,21 +173,22 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/framework7/css" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Helpers" />
       <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/public/fonts" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/public/framework7" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/framework7/css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -217,7 +221,7 @@
       <workItem from="1573486985383" duration="13610000" />
       <workItem from="1573573452303" duration="598000" />
       <workItem from="1573640490731" duration="1212000" />
-      <workItem from="1573857835363" duration="829000" />
+      <workItem from="1573857835363" duration="1648000" />
     </task>
     <servers />
   </component>
